@@ -1,6 +1,6 @@
 module.exports = {
 	opts: {
-		"url": "mongodb://people:people@localhost:port/people",
+		"url": "mongodb://localhost/people",
 		"settings": {
 			"db": {
 				"native_parser": false

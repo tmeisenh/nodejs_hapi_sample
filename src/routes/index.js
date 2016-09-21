@@ -1,22 +1,11 @@
 "use strict";
 
-var helloController = require('src/controllers/hello');
+// define all routes and just concat them together...
+// project structure seems to be in-flux a bit
+
+var hello = require('../hello/hello-routes.js')
+var people = require('../people/people-routes.js')
 
 module.exports = function() {
-	return [
-	{
-		method: 'GET',
-		path: '/hello',
-		config : {
-			handler: helloController.hello,
-		}
-	},
-	{
-		method: 'POST',
-		path: '/hello',
-		config : {
-			handler: helloController.hello,
-		}
-	}
-	];
+  return [].concat(hello, people);
 }();
