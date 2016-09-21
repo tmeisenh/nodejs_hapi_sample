@@ -1,0 +1,7 @@
+{
+  "mongo": {
+    "driver": "mongodb",
+    "database": "people",
+    "host": "localhost"
+  }
+}
