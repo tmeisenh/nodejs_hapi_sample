@@ -17,6 +17,13 @@ module.exports = function() {
 		config : {
 			handler: peoplehandler.create,
 		}
+	},
+	{
+		method: 'DELETE',
+		path: '/people',
+		config : {
+			handler: peoplehandler.remove,
+		}
 	}
 	];
 }();

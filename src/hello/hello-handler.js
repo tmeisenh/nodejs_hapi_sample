@@ -4,11 +4,10 @@ var Hapi = require('hapi');
 
 function HelloHandler(){};
 HelloHandler.prototype = (function(){
-
   return {
     hello: function hello(request, reply) {
       reply('hello world!');
-    },
+    }
   }
 })();
 

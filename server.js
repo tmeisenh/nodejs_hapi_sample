@@ -1,7 +1,8 @@
 'use strict';
 
 const Hapi = require('hapi');
-var routes = require('./src/routes');
+const routes = require('./src/routes');
+const db = require('./src/config/db');
 
 // Create a server with a host and port
 const server = new Hapi.Server();
@@ -12,11 +13,31 @@ server.connection({
 
 server.route(routes);
 
-// Start the server
-server.start((err) => {
+const MongooseOptions =  {
+	bluebird: false,
+	uri: "mongodb://localhost:27017/people",
+};
 
-  if (err) {
-    throw err;
-  }
-  console.log('Server running at:', server.info.uri);
+server.register({
+	register: require('hapi-mongoose'),
+	options: MongooseOptions
+}, (err) => {
+	if (err) {
+		console.error(err);
+		throw err;
+	}
+
+	server.start((err) => {
+		if (err) {
+			throw err;
+		}
+
+		console.log('Server running at:', server.info.uri);
+
+		var connection = server.plugins['hapi-mongoose'].connection;
+		var mongoose = server.plugins['hapi-mongoose'].lib;
+    mongoose.set('debug', true);
+    db.initializeModels(connection);
+	});
 });
+
